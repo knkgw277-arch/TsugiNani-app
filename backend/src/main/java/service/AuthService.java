@@ -7,18 +7,22 @@ import com.tsuginani.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.tsuginani.backend.dto.LoginRequest;
+import com.tsuginani.backend.dto.LoginResponse;
+import com.tsuginani.backend.security.JwtUtil;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    // コンストラクタで必要な部品（Repository・PasswordEncoder）を受け取る
     @Autowired
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     public RegisterResponse register(RegisterRequest request) {
@@ -41,5 +45,22 @@ public class AuthService {
 
         // ④ レスポンス用のDTOに変換して返す
         return new RegisterResponse(savedUser.getUserId(), savedUser.getEmail(), "登録が完了しました");
+        }
+
+        public LoginResponse login(LoginRequest request) {
+
+            // ① メールアドレスでユーザーを検索する（見つからなければエラー）
+            User user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new IllegalArgumentException("メールアドレスまたはパスワードが違います"));
+
+            // ② パスワードが一致するか確認する（ハッシュ同士を比較する専用メソッドを使う）
+            if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+                throw new IllegalArgumentException("メールアドレスまたはパスワードが違います");
+            }
+
+            // ③ 認証成功なので、アクセストークンを発行する
+            String token = jwtUtil.generateToken(user.getEmail());
+
+            return new LoginResponse(token, "Bearer", "ログインに成功しました");
+        }
     }
-}
