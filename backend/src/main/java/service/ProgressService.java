@@ -31,15 +31,16 @@ public class ProgressService {
     public ProgressResponse advanceToNextStep(String email) {
         User user = findUserByEmail(email);
 
-        // 現在地（currentStepがnullなら「まだ何も始めていない」ので0扱いにする）
         int currentOrder = (user.getCurrentStep() == null) ? 0 : user.getCurrentStep().getStepOrder();
         int nextOrder = currentOrder + 1;
 
-        // 次のstep_orderのタスクを探す
         Task nextTask = taskRepository.findFirstByStepOrder(nextOrder);
 
-        // 見つからなければ「もう次がない＝全タスク完了」なので、currentStepをnullにする
         user.setCurrentStep(nextTask);
+        if (nextTask == null) {
+            // 次のタスクが見つからなかった = 全タスク完了
+            user.setCompleted(true);
+        }
         userRepository.save(user);
 
         return buildProgressResponse(user);
@@ -49,6 +50,7 @@ public class ProgressService {
     public ProgressResponse resetProgress(String email) {
         User user = findUserByEmail(email);
         user.setCurrentStep(null);
+        user.setCompleted(false);
         userRepository.save(user);
         return buildProgressResponse(user);
     }
@@ -65,8 +67,7 @@ public class ProgressService {
         Task currentStep = user.getCurrentStep();
 
         if (currentStep == null) {
-            // currentStepがnull = まだ未着手 or 全タスク完了、のどちらか
-            boolean isCompleted = hasEverStarted(user) ;
+            boolean isCompleted = user.isCompleted();
             return new ProgressResponse(null, isCompleted ? (int) totalSteps : 0, (int) totalSteps, isCompleted);
         }
 

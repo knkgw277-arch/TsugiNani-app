@@ -22,6 +22,9 @@ public class User {
     @JoinColumn(name = "current_step_id", referencedColumnName = "task_id")
     private Task currentStep;
 
+    @Column(nullable = false)
+    private boolean completed = false;
+
     // JPAが内部で使うための引数なしコンストラクタ
     public User() {
     }
@@ -57,5 +60,12 @@ public class User {
 
     public void setCurrentStep(Task currentStep) {
         this.currentStep = currentStep;
+    }
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
