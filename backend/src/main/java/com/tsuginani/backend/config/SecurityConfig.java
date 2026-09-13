@@ -35,7 +35,9 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://tsugi-nani-app.vercel.app"
+                "https://tsugi-nani-app.vercel.app",
+                "https://tsugi-nani-l1yywgv42-tsugi-nani.vercel.app"
+        ));
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
