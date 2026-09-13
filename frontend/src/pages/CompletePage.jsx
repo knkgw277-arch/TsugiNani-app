@@ -15,20 +15,62 @@ function CompletePage() {
     };
 
     return (
-        <div style={{ maxWidth: '500px', margin: '120px auto', padding: '0 20px', textAlign: 'center' }}>
-            <h1>🎉 お疲れ様でした！</h1>
-            <p>すべてのタスクが完了しました。</p>
-            <p>アプリ開発の一連の流れを最後までやり遂げましたね！</p>
-
-            <div style={{ marginTop: '32px' }}>
-                <button onClick={handleRestart} style={{ padding: '10px 20px', marginRight: '12px' }}>
-                    もう一度最初から
-                </button>
-                <button onClick={handleLogout} style={{ padding: '10px 20px' }}>
-                    ログアウト
-                </button>
+        <main className="complete-page">
+            <div className="complete-decoration complete-decoration-one">
+                ✦
             </div>
-        </div>
+
+            <div className="complete-decoration complete-decoration-two">
+                ✦
+            </div>
+
+            <div className="complete-decoration complete-decoration-three">
+                •
+            </div>
+
+            <section className="complete-card">
+
+                <div className="complete-icon">
+                    ✓
+                </div>
+
+                <p className="complete-label">
+                    ALL DONE!
+                </p>
+
+                <h1>
+                    すべてのタスクを
+                    <br />
+                    完了しました
+                </h1>
+
+                <p className="complete-message">
+                    ここまでの学習、おつかれさまでした。
+                    <br />
+                    一つずつ進めて、最後までやり切りましたね。
+                </p>
+
+                <div className="complete-actions">
+
+                    <button
+                        className="complete-restart-button"
+                        onClick={handleRestart}
+                    >
+                        最初からやり直す
+                        <span>→</span>
+                    </button>
+
+                    <button
+                        className="complete-logout-button"
+                        onClick={handleLogout}
+                    >
+                        ログアウト
+                    </button>
+
+                </div>
+
+            </section>
+        </main>
     );
 }
 

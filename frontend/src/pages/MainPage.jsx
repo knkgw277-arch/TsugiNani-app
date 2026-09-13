@@ -11,7 +11,6 @@ function MainPage() {
         fetchProgress();
     }, []);
 
-    // 完了状態になったら、画面の描画が終わった後で移動する（レンダリング中に移動しない）
     useEffect(() => {
         if (progress && progress.completed) {
             navigate('/complete');
@@ -47,44 +46,115 @@ function MainPage() {
     };
 
     if (loading) {
-        return <p style={{ textAlign: 'center', marginTop: '80px' }}>読み込み中...</p>;
+        return (
+            <div className="page-loading">
+                <div className="loading-spinner"></div>
+                <p>読み込み中...</p>
+            </div>
+        );
     }
 
     if (progress && progress.completed) {
         return null;
     }
 
-    return (
-        <div style={{ maxWidth: '500px', margin: '80px auto', padding: '0 20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
-                <h1>つぎなに？</h1>
-                <button onClick={handleLogout}>ログアウト</button>
-            </div>
+    const progressPercent =
+        progress && progress.totalSteps
+            ? (progress.currentStepOrder / progress.totalSteps) * 100
+            : 0;
 
-            {progress && progress.currentTask ? (
-                <div>
-                    <p>
-                        進捗：{progress.currentStepOrder} / {progress.totalSteps}
+    return (
+        <div className="main-page">
+            <header className="app-header">
+                <div className="logo">
+                    <span className="logo-mark">→</span>
+                    <span>つぎなに？</span>
+                </div>
+
+                <button className="logout-button" onClick={handleLogout}>
+                    ログアウト
+                </button>
+            </header>
+
+            <main className="main-content">
+                <section className="welcome-section">
+                    <p className="eyebrow">YOUR NEXT STEP</p>
+                    <h1>迷わず、ひとつずつ。</h1>
+                    <p className="welcome-text">
+                        今日やることを１つに絞って、
+                        <br />
+                        少しずつ前に進めよう。
                     </p>
-                    <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '24px', marginBottom: '24px' }}>
-                        <h2>{progress.currentTask.title}</h2>
-                        <p>{progress.currentTask.description}</p>
-                    </div>
-                    <button onClick={handleNext} style={{ padding: '10px 20px', marginRight: '12px' }}>
-                        完了して次へ
-                    </button>
-                    <button onClick={handleReset} style={{ padding: '10px 20px' }}>
-                        最初からやり直す
-                    </button>
-                </div>
-            ) : (
-                <div>
-                    <p>まだ何も始まっていません。最初のタスクを始めましょう！</p>
-                    <button onClick={handleNext} style={{ padding: '10px 20px' }}>
-                        始める
-                    </button>
-                </div>
-            )}
+                </section>
+
+                {progress && progress.currentTask ? (
+                    <section className="task-card">
+                        <div className="task-top">
+                            <div>
+                                <span className="step-label">STEP</span>
+                                <span className="step-number">
+                                    {String(progress.currentStepOrder).padStart(2, '0')}
+                                </span>
+                            </div>
+
+                            <span className="step-count">
+                                {progress.currentStepOrder} / {progress.totalSteps}
+                            </span>
+                        </div>
+
+                        <div className="progress-track">
+                            <div
+                                className="progress-fill"
+                                style={{ width: `${progressPercent}%` }}
+                            ></div>
+                        </div>
+
+                        <div className="task-body">
+                            <p className="task-kicker">TODAY'S TASK</p>
+
+                            <h2>{progress.currentTask.title}</h2>
+
+                            <p className="task-description">
+                                {progress.currentTask.description}
+                            </p>
+                        </div>
+
+                        <div className="task-actions">
+                            <button className="primary-button" onClick={handleNext}>
+                                完了して次へ
+                                <span>→</span>
+                            </button>
+
+                            <button className="reset-button" onClick={handleReset}>
+                                最初からやり直す
+                            </button>
+                        </div>
+                    </section>
+                ) : (
+                    <section className="start-card">
+                        <div className="start-icon">✦</div>
+
+                        <p className="task-kicker">READY TO START?</p>
+
+                        <h2>まずは、ここから。</h2>
+
+                        <p className="task-description">
+                            最初のタスクから始めて、
+                            <br />
+                            あなたの開発を一歩ずつ進めていこう。
+                        </p>
+
+                        <button className="primary-button" onClick={handleNext}>
+                            始める
+                            <span>→</span>
+                        </button>
+                    </section>
+                )}
+
+                <p className="encouragement">
+                    ちょっとずつで大丈夫。次にやることは、ここにあります。
+                </p>
+            </main>
         </div>
     );
 }

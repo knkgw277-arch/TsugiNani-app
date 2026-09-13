@@ -9,11 +9,12 @@ function RegisterPage() {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // フォームのデフォルト送信（ページリロード）を止める
+        e.preventDefault();
         setErrorMessage('');
 
         try {
             await register(email, password);
+
             // 登録成功したら、ログイン画面へ移動する
             navigate('/login');
         } catch (error) {
@@ -21,51 +22,78 @@ function RegisterPage() {
             if (error.response && error.response.data && error.response.data.message) {
                 setErrorMessage(error.response.data.message);
             } else {
-                setErrorMessage('登録に失敗しました。時間をおいて再度お試しください。');
+                setErrorMessage(
+                    '登録に失敗しました。時間をおいて再度お試しください。'
+                );
             }
         }
     };
 
     return (
-        <div style={{ maxWidth: '400px', margin: '80px auto', padding: '0 20px' }}>
-            <h1>会員登録</h1>
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '16px' }}>
-                    <label>メールアドレス</label>
-                    <br />
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '16px' }}>
-                    <label>パスワード（8文字以上）</label>
-                    <br />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        minLength={8}
-                        style={{ width: '100%', padding: '8px' }}
-                    />
+        <div className="auth-page">
+            <div className="auth-card">
+                <div className="auth-logo">
+                    <span className="logo-mark">→</span>
+                    <span>つぎなに？</span>
                 </div>
 
-                {errorMessage && (
-                    <p style={{ color: 'red' }}>{errorMessage}</p>
-                )}
+                <div className="auth-heading">
+                    <p className="eyebrow">GET STARTED</p>
+                    <h1>はじめの一歩。</h1>
+                    <p>
+                        アカウントを作成して、
+                        <br />
+                        開発を一歩ずつ進めていきましょう。
+                    </p>
+                </div>
 
-                <button type="submit" style={{ padding: '10px 20px' }}>
-                    登録する
-                </button>
-            </form>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className="form-group">
+                        <label htmlFor="email">メールアドレス</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            autoComplete="email"
+                            placeholder="example@email.com"
+                        />
+                    </div>
 
-            <p style={{ marginTop: '16px' }}>
-                すでにアカウントをお持ちの方は <Link to="/login">ログイン</Link>
-            </p>
+                    <div className="form-group">
+                        <label htmlFor="password">パスワード（8文字以上）</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            minLength={8}
+                            autoComplete="new-password"
+                            placeholder="8文字以上で入力"
+                        />
+                    </div>
+
+                    {errorMessage && (
+                        <p className="auth-error">{errorMessage}</p>
+                    )}
+
+                    <button type="submit" className="auth-button">
+                        アカウントを作成
+                        <span>→</span>
+                    </button>
+                </form>
+
+                <div className="auth-footer">
+                    <p>
+                        すでにアカウントをお持ちの方は
+                    </p>
+                    <Link to="/login" className="auth-link">
+                        ログインはこちら
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }
