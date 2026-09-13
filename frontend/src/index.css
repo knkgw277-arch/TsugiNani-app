@@ -1029,3 +1029,44 @@ button:focus-visible {
     display: none;
   }
 }
+/* MainPage ヒーローエリア */
+.welcome-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.welcome-text-area {
+  text-align: left;
+}
+
+.hero-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  border-radius: 24px;
+}
+@media (max-width: 768px) {
+  .welcome-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .welcome-text-area {
+    text-align: center;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+  }
+}

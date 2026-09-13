@@ -78,13 +78,24 @@ function MainPage() {
 
             <main className="main-content">
                 <section className="welcome-section">
-                    <p className="eyebrow">YOUR NEXT STEP</p>
-                    <h1>迷わず、ひとつずつ。</h1>
-                    <p className="welcome-text">
-                        今日やることを１つに絞って、
-                        <br />
-                        少しずつ前に進めよう。
-                    </p>
+                    <div className="welcome-text-area">
+                        <p className="eyebrow">YOUR NEXT STEP</p>
+
+                        <h1>迷わず、ひとつずつ。</h1>
+
+                        <p className="welcome-text">
+                            今日やることをひとつに絞って、
+                            <br />
+                            開発を少しずつ前に進めよう。
+                        </p>
+                    </div>
+
+                    <div className="hero-image">
+                        <img
+                            src="/images/main-hero.png"
+                            alt="開発を一歩ずつ進めるイメージ"
+                        />
+                    </div>
                 </section>
 
                 {progress && progress.currentTask ? (
