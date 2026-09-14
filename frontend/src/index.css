@@ -1069,7 +1069,24 @@ button:focus-visible {
   .hero-image img {
     max-width: 100%;
   }
+
+  .auth-illustration {
+    margin-top: 16px;
+  }
+
+  .auth-illustration img {
+    max-width: 280px;
+  }
+
+  .complete-illustration {
+    margin: 12px auto 16px;
+  }
+
+  .complete-illustration img {
+    max-width: 280px;
+  }
 }
+
 /* LoginPage イラスト */
 .auth-illustration {
   margin-top: 28px;
