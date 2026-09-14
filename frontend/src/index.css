@@ -480,9 +480,9 @@ button:focus-visible {
 
 .auth-card {
   width: 100%;
-  max-width: 440px;
+  max-width: 560px;
 
-  padding: 42px 44px;
+  padding: 42px 56px;
 
   background: var(--card);
   border: 1px solid var(--border);
