@@ -1,17 +1,30 @@
 # つぎなに？ ～開発初心者向け学習タスクアプリ～
 
-> **迷わず進める1ステップ集中型タスクナビ**
+> **迷わず進める１ステップ集中型タスクナビ**
 
 「次に何をすればいいか分からない」という開発初心者の悩みを解決するための、学習タスクナビゲーションWebアプリ。1回に取り組むタスクを１つに絞り、「完了して次へ」を押しながら開発の流れを順番に進めるようした。
+## 🌱 アプリイメージ
+
+![つぎなに？ アプリイメージ](docs/TsugiNani-app-img.png)
 
 ---
 
 ## 🌐 アプリケーションURL
 
-https://tsugi-nani-app.vercel.app
+### 本番環境
+https://tsugi-nani-app.vercel.app/
 
-\*テスト⽤アカウント（ID：user2@example.com/パスワード：12345abcde）は、
-新規登録画面確認する際は、適当にID/パスワードを登録することも可能。
+### ログイン画面
+https://tsugi-nani-app.vercel.app/login
+
+本番環境のトップページからログイン画面へ移動できます。
+## 🔑 テスト用アカウント
+
+メールアドレス：user2@example.com  
+パスワード：12345abcde
+
+※新規登録画面では、任意のメールアドレス・パスワードを入力して
+新しくアカウントを作成することもできます。
 
 **GitHub**
 https://github.com/knkgw277-arch/TsugiNani-app
@@ -47,20 +60,18 @@ Webアプリ開発を学習していると、実装・データベース・API�
 
 ## ✨ 主な機能
 
-機能 内容
-
----
-
-新規会員登録 メールアドレスとパスワードでアカウントを作成
-ログイン 登録済みアカウントでログイン
-タスク表示 現在取り組むべきタスクを1件表示
-進捗表示 現在のステップと全体の進捗を表示
-次のタスクへ タスクを完了し、次のステップへ進む
-進捗保存 現在のステップをデータベースへ保存
-進捗復元 再ログイン後に前回の進捗から再開
-ログアウト アクセストークンを削除してログイン画面へ戻る
-完了画面 すべてのタスク完了時に表示
-リセット 最初のタスクからやり直す
+| 機能 | 内容 |
+|---|---|
+| 新規会員登録 | メールアドレスとパスワードでアカウントを作成 |
+| ログイン | 登録済みアカウントでログイン |
+| タスク表示 | 現在取り組むべきタスクを1件表示 |
+| 進捗表示 | 現在のステップと全体の進捗を表示 |
+| 次のタスクへ | タスクを完了し、次のステップへ進む |
+| 進捗保存 | 現在のステップをデータベースへ保存 |
+| 進捗復元 | 再ログイン後に前回の進捗から再開 |
+| ログアウト | ログアウトしてログイン画面へ戻る |
+| 完了画面 | すべてのタスク完了時に表示 |
+| リセット | 最初のタスクからやり直す |
 
 ---
 
@@ -70,19 +81,19 @@ Webアプリ開発を学習していると、実装・データベース・API�
 
 ### ログイン画面
 
-![ログイン画面](docs/screenshots/login.png)
+![ログイン画面](docs/screenshots/TsugiNani-Login.jpg)
 
 ### 会員登録画面
 
-![会員登録画面](docs/screenshots/register.png)
+![会員登録画面](docs/screenshots/TsugiNani-Register.jpg)
 
 ### メイン画面
 
-![メイン画面](docs/screenshots/main.png)
+![メイン画面](docs/screenshots/TsugiNani-Main.jpg)
 
 ### 完了画面
 
-![完了画面](docs/screenshots/complete.png)
+![完了画面](docs/screenshots/TsugiNani-Complete.jpg)
 
 ---
 
@@ -213,16 +224,14 @@ erDiagram
 
 ## 🔌 主なAPI
 
-HTTPメソッド エンドポイント 内容
-
----
-
-POST `/api/auth/register` 新規会員登録
-POST `/api/auth/login` ログイン
-GET `/api/progress/me` 現在の進捗を取得
-GET `/api/tasks` タスク一覧を取得
-POST `/api/progress/next` 次のタスクへ進む
-POST `/api/progress/reset` 進捗を最初に戻す
+| メソッド | エンドポイント | 内容 |
+|---|---|---|
+| POST | `/api/auth/register` | 新規会員登録 |
+| POST | `/api/auth/login` | ログイン |
+| GET | `/api/progress/me` | 現在の進捗を取得 |
+| GET | `/api/tasks` | タスク一覧を取得 |
+| POST | `/api/progress/next` | 次のタスクへ進む |
+| POST | `/api/progress/reset` | 進捗を最初に戻す |
 
 ---
 
