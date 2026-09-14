@@ -1070,3 +1070,17 @@ button:focus-visible {
     max-width: 100%;
   }
 }
+/* LoginPage イラスト */
+.auth-illustration {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.auth-illustration img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+}

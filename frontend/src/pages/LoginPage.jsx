@@ -92,6 +92,13 @@ function LoginPage() {
                         会員登録はこちら
                     </Link>
                 </div>
+
+                <div className="auth-illustration">
+                    <img
+                        src="/images/Login.png"
+                        alt="開発を一歩ずつ進めるイメージ"
+                    />
+                </div>
             </div>
         </div>
     );
