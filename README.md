@@ -2,14 +2,14 @@
 
 > **迷わず進める１ステップ集中型タスクナビ**
 
-「次に何をすればいいか分からない」という開発初心者の悩みを解決するための、学習タスクナビゲーションWebアプリ。1回に取り組むタスクを１つに絞り、「完了して次へ」を押しながら開発の流れを順番に進めるようした。
-## 🌱 アプリイメージ
+「次に何をすればいいか分からない」という開発初心者の悩みを解決するための『学習タスクナビゲーションWebアプリ』。１回に取り組むタスクを１つに絞り、「完了して次へ」を押しながら開発の流れを順番に進めるようした。
+## アプリイメージ
 
 ![つぎなに？ アプリイメージ](docs/TsugiNani-app-img.png)
 
 ---
 
-## 🌐 アプリケーションURL
+## アプリケーションURL
 
 ### 本番環境
 https://tsugi-nani-app.vercel.app/
@@ -18,7 +18,7 @@ https://tsugi-nani-app.vercel.app/
 https://tsugi-nani-app.vercel.app/login
 
 本番環境のトップページからログイン画面へ移動できます。
-## 🔑 テスト用アカウント
+### テスト用アカウント
 
 メールアドレス：user2@example.com  
 パスワード：12345abcde
@@ -31,7 +31,7 @@ https://github.com/knkgw277-arch/TsugiNani-app
 
 ---
 
-## 📱 アプリケーションの概要
+## アプリケーションの概要
 
 Webアプリ開発を始めたばかりの初心者を対象とする。
 Webアプリ開発では、
@@ -43,14 +43,14 @@ Webアプリ開発では、
 
 ---
 
-## 💡 開発した背景
+## 開発した背景
 
 Webアプリ開発を学習していると、実装・データベース・API・画面作成など、やるべきことがどんどん増えていく。
 特に開発初心者にとっては、「作るものは決まっているけれど、次に何をすればいいのか分からない」という状態になりやすいと感じ、
 
 > **「次にやることを考える時間を減らし、ひとつの作業に集中できるようにする」**
 
-ことを目的として、このアプリを制作。
+ことを目的として制作。
 
 ### 設計で意識したこと
 
@@ -58,7 +58,7 @@ Webアプリ開発を学習していると、実装・データベース・API�
 
 ---
 
-## ✨ 主な機能
+## 主な機能
 
 | 機能 | 内容 |
 |---|---|
@@ -75,17 +75,16 @@ Webアプリ開発を学習していると、実装・データベース・API�
 
 ---
 
-## 🖥️ アプリケーションのデモ
+## アプリケーションのデモ
 
-文字だけでは伝わりにくいUIや操作感を、スクリーンショットで紹介します。
-
-### ログイン画面
-
-![ログイン画面](docs/screenshots/TsugiNani-Login.jpg)
 
 ### 会員登録画面
 
 ![会員登録画面](docs/screenshots/TsugiNani-Register.jpg)
+
+### ログイン画面
+
+![ログイン画面](docs/screenshots/TsugiNani-Login.jpg)
 
 ### メイン画面
 
@@ -97,7 +96,7 @@ Webアプリ開発を学習していると、実装・データベース・API�
 
 ---
 
-## 🔄 アプリの利用フロー
+## アプリの利用フロー
 
 ```text
 新規会員登録
@@ -129,78 +128,27 @@ Complete画面
 
 ---
 
-## 🛠️ 主な使用技術
+## 主な使用技術
 
-### フロントエンド
-
-- React
-- Vite
-- JavaScript
-- Axios
-- React Router
-
-### バックエンド
-
-- Java
-- Spring Boot
-- Spring Security
-- JWT
-
-### データベース
-
-- MySQL
-
-### 開発・管理
-
-- IntelliJ IDEA
-- VS Code
-- Docker / Docker Compose
-- Postman
-- GitHub / GitHub Desktop
-
-### デプロイ
-
-- Vercel：フロントエンド
-- Railway：バックエンド・MySQL
+| 分類 | 技術 |
+|---|---|
+| フロントエンド | React / Vite / JavaScript / Axios / React Router |
+| バックエンド | Java / Spring Boot / Spring Security / JWT |
+| データベース | MySQL |
+| 開発・管理 | IntelliJ IDEA / VS Code / Docker / Docker Compose / Postman / GitHub / GitHub Desktop |
+| デプロイ | Vercel（フロントエンド） / Railway（バックエンド・MySQL） |
 
 ---
 
-## 🏗️ システム構成
+## システム構成
 
-```mermaid
-flowchart LR
-    U[利用者<br>PC / スマートフォン]
-    V[Vercel<br>React / Vite]
-    R[Railway<br>Spring Boot]
-    DB[(MySQL)]
-
-    U --> V
-    V -->|REST API / JWT| R
-    R --> DB
-```
+![システム構成図](mermaid-diagram.png)
 
 ---
 
-## 🗄️ ER図
+## ER図
 
-```mermaid
-erDiagram
-    USERS ||--o{ TASKS : "current_step_idで参照"
-
-    USERS {
-        BIGINT user_id PK
-        VARCHAR email UK
-        VARCHAR password_hash
-        BIGINT current_step_id FK
-    }
-
-    TASKS {
-        BIGINT task_id PK
-        VARCHAR title
-        TEXT description
-        INT step_order UK
-    }
-```
+![ER図](mermaid-diagram-er.png)
 
 ### データ設計のポイント
 
@@ -214,7 +162,7 @@ erDiagram
 
 ---
 
-## 🔐 認証・セキュリティ
+## 認証・セキュリティ
 
 ログイン時にバックエンドからJWTアクセストークンを発行し、以降のAPI通信で利用。
 フロントエンドではアクセストークンを保存し、APIリクエスト時にAuthorizationヘッダーへ付与。
@@ -222,7 +170,7 @@ erDiagram
 
 ---
 
-## 🔌 主なAPI
+## 主なAPI
 
 | メソッド | エンドポイント | 内容 |
 |---|---|---|
@@ -235,7 +183,7 @@ erDiagram
 
 ---
 
-## 📁 プロジェクト構成
+## プロジェクト構成
 
 ```text
 TsugiNani-app/
@@ -269,7 +217,7 @@ TsugiNani-app/
 
 ---
 
-## 🚀 ローカル環境での起動方法
+## ローカル環境での起動方法
 
 ### 1. リポジトリをクローン
 
@@ -308,7 +256,7 @@ http://localhost:5173
 
 ---
 
-## ✅ 動作確認
+## 動作確認
 
 以下の主要なMVP機能について動作確認を行っている。
 
@@ -327,7 +275,7 @@ http://localhost:5173
 
 ---
 
-## 🎨 UI・UXで意識したこと
+## UI・UXで意識したこと
 
 初心者が「次に何をすればいいのか」で迷わないことを重視し、1画面に表示する情報を整理した。
 
@@ -339,7 +287,7 @@ http://localhost:5173
 
 ---
 
-## 🔧 工夫した点・苦労した点
+## 工夫した点・苦労した点
 
 ### 1. 進捗をデータベースに保存
 
@@ -359,10 +307,11 @@ ReactとSpring Bootを分離し、REST APIを介して通信する構成。画�
 
 ---
 
-## 📌 今後改善したいこと
+## 今後改善したいこと
 
 現時点では「次にやることをひとつに絞って提示する」という基本機能を完成。今後は以下のような機能を追加すると、さらに学習を継続しやすいアプリへ発展させられると考えている。
 
+- 目的や使い方を紹介するランディングページ追加
 - タスクごとの学習メモ
 - タスク完了履歴
 - 学習進捗の可視化
