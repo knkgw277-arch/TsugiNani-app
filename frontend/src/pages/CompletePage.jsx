@@ -34,6 +34,13 @@ function CompletePage() {
                     ✓
                 </div>
 
+                <div className="complete-illustration">
+                    <img
+                        src="/images/Complete.png"
+                        alt="タスク完了のイメージ"
+                    />
+                </div>
+
                 <p className="complete-label">
                     ALL DONE!
                 </p>

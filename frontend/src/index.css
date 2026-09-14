@@ -1084,3 +1084,17 @@ button:focus-visible {
   margin: 0 auto;
   border-radius: 20px;
 }
+/* CompletePage イラスト */
+.complete-illustration {
+  margin: 20px auto 24px;
+  text-align: center;
+}
+
+.complete-illustration img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+}
