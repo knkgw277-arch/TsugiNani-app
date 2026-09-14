@@ -93,6 +93,13 @@ function RegisterPage() {
                         ログインはこちら
                     </Link>
                 </div>
+
+                <div className="auth-illustration">
+                    <img
+                        src="/images/Register.png"
+                        alt="開発を始めるイメージ"
+                    />
+                </div>
             </div>
         </div>
     );
