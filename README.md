@@ -142,13 +142,11 @@ Complete画面
 
 ## システム構成
 
-![システム構成図](mermaid-diagram.png)
-
----
+![システム構成図](docs/mermaid-diagram.png)
 
 ## ER図
 
-![ER図](mermaid-diagram-er.png)
+![ER図](docs/mermaid-diagram-er.png)
 
 ### データ設計のポイント
 
